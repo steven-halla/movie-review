@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { Router } from '@reach/router';
+import Home from './views/Home.html';
+// import CriticView from './views/CriticView';
+// import MovieView from './views/MovieView';
+// import Login from './views/Login';
+// import Register from './views/Register';
+
+
 
 function App() {
-  return (
+  return(
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Home path="/"  />
+        <CriticView path="/critic" />
+        <Login path="/login" />
+        <MovieView path="/movie"/>
+        <Register path="/register"/>
+      </Router>
     </div>
   );
 }
 
 export default App;
+
