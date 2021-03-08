@@ -36,3 +36,45 @@
     transform: rotate(360deg);
   }
 }
+
+/*body {*/
+/*  background-color: red;*/
+/*}*/
+.login-view .title .login-form input {
+
+}
+
+.login-view {
+
+  .title {
+
+  }
+
+  .login-form {
+    input {
+
+    }
+  }
+}
+
+.home-view {
+
+}
+
+.loginbgcolor{
+  background-image: linear-gradient( to right, blue, aqua );
+}
+
+.movie-image{
+  width: 200px;
+  height: 200px;
+}
+
+.loginbox{
+  background-color: #0080ff;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  border-radius: 25px;
+}
