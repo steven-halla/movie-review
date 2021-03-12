@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -57,8 +58,25 @@
   }
 }
 
-.home-view {
+.home-header {
+  background: cornflowerblue;
+  text-decoration: aliceblue;
+  color: wheat;
+}
 
+.home-header p {
+  color: forestgreen;
+  font-size: larger;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+  font-size: larger;
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 .loginbgcolor{
@@ -78,3 +96,4 @@
   padding: 10px;
   border-radius: 25px;
 }
+

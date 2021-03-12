@@ -9,12 +9,15 @@ import {CriticView} from './views/CriticView';
 import {MovieList} from './views/MovieList';
 import {MovieView} from './views/MovieView';
 import {CreateReview} from './views/CreateReview';
+import {LoginStateHandler} from './views/LoginStateHandler';
 
 
 // change up home view
 
 import './App.scss';
 import {SignoutView} from "./views/SignoutView";
+import {Header} from "./views/Header";
+import {ProfileView} from "./views/ProfileView";
 
 
 export const App = () => {
@@ -23,31 +26,32 @@ export const App = () => {
 
     const [user, setUser] = useState({
         userName: "",
-        email:"",
+        email: "",
         password: "",
         confirmPassword: "",
     });
 
-    const [movie, setMovie] = useState( {
+    const [movie, setMovie] = useState({
         title: "",
         rating: "",
     });
 
     //i put this in so that our critic list will display data
-    const[users, setUsers] = useState([]);
-    const[movies, setMovies] = useState([]);
-
+    const [users, setUsers] = useState([]);
+    const [movies, setMovies] = useState([]);
 
 
     return (
-        <div className="App">
+        <Router history={history}>
+            <div className="App">
 
-            {/*<header />*/}
+                <LoginStateHandler history={history}/>
 
-            <Router history={history}>
+                <Header user={user} history={history}/>
+
                 <Switch>
                     <Route exact path="/signin">
-                        <SigninView user={user} setUser={setUser} />
+                        <SigninView user={user} setUser={setUser}/>
                     </Route>
 
                     <Route exact path="/signup">
@@ -55,14 +59,18 @@ export const App = () => {
                     </Route>
 
                     <Route exact path="/signout">
-                        <SignoutView />
+                        <SignoutView setUser={setUser}/>
                     </Route>
 
                     <Route exact path="/">
-                        <HomeView user={user} setUser={setUser} />
+                        <HomeView user={user} setUser={setUser}/>
                     </Route>
 
-                    <Route exact path="/movielist">
+                    <Route exact path="/profile">
+                        <ProfileView user={user}/>
+                    </Route>
+
+                    <Route exact path="/movies">
                         <MovieList movies={movies} setMovies={setMovies}/>
                     </Route>
 
@@ -70,16 +78,16 @@ export const App = () => {
                         <MovieView movie={movie} setMovie={setMovie}/>
                     </Route>
 
-                    <Route exact path="/criticlist">
+                    <Route exact path="/critics">
                         <CriticList users={users} setUsers={setUsers}/>
                     </Route>
 
                     <Route exact path="/critics/:id">
-                        <CriticView user={user} setUser={setUser} />
+                        <CriticView user={user} setUser={setUser}/>
                     </Route>
 
                     <Route exact path="/critic/movie/:id">
-                        <CreateReview user={user} setUser={setUser} movie={movie} setMovie={setMovie} />
+                        <CreateReview user={user} setUser={setUser} movie={movie} setMovie={setMovie}/>
                     </Route>
 
                 </Switch>
@@ -89,10 +97,10 @@ export const App = () => {
                 {/*<MovieView path="/movie"/>*/}
                 {/*<Register path="/register"/>*/}
 
-            </Router>
 
-            {/*<footer />*/}
-        </div>
+                {/*<footer />*/}
+            </div>
+        </Router>
     );
 }
 
