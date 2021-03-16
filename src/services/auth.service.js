@@ -3,6 +3,8 @@ import axios from "axios";
 const API_URL = "http://localhost:7777";
 
 // I took out display name from lines 6 and 8
+
+// do I need to set rating/ reviews to something as a base?
 export const signup = (email, password, displayName) => {
     return axios
         .post(API_URL + "/auth/signup", {

@@ -3,14 +3,10 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import {isEmail} from "validator";
-
-
-// import {} from "../services/auth.service";
-import {Link} from 'react-router-dom';
-
 import {signin} from "../services/auth.service";
 import {history} from '../browserHistory';
-
+// import {} from "../services/auth.service";
+import {Link} from 'react-router-dom';
 // import AuthService from "../services/auth.service";
 
 const required = value => {
@@ -20,7 +16,6 @@ const required = value => {
                 <p>This field is required </p>
             </div>
         );
-        return;
     }
 };
 
@@ -31,7 +26,6 @@ const validEmail = (value) => {
                 <p>This is not a valid email</p>
             </div>
         );
-        return;
     }
 };
 
@@ -42,11 +36,15 @@ const validPassword = (value) => {
                 <p>Password must be between 8 and 20 characters</p>
             </div>
         );
-        return;
     }
 };
 
-export const SigninView = props => {
+// interface Props {
+//     user: User;
+//     setUser: (user: User) => void;
+// }
+// export const SigninView = props => { // same as with ()
+export const SigninView = (props) => {
     const {user, setUser} = props;
 
     const form = useRef();

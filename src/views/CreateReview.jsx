@@ -1,23 +1,27 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import {history} from "../browserHistory";
+import {useParams} from "react-router";
+import {createMovieReview} from "../services/movie.service";
 
-export const CreateReview = ({user, setUser}) => {
+// I am thinking I am passing user and movieId the wrong way
+export const CreateReview = ({user}) => {
     const [rating, setRating] = useState("");
+
+    const { id } = useParams();
 
     const formHandler = (event) => {
         event.preventDefault();
 
-        const newReview = {
-            rating: rating
-        };
-        // should this be a post, or update? I'm thinking UPdate as we are not creating
-        //something new
-        axios.patch(`http://localhost:7777/movies`, newReview)
-            .then((res) => {
-                console.log(res);
-                history.push("/movielist");
-            });
+        if (!rating) {
+            alert("Please select a rating");
+        }
+
+        createMovieReview(id, rating).then(newReview => {
+            console.log("created movie review:")
+            console.log(newReview);
+            history.push("/");
+        });
     };
 
 
@@ -30,19 +34,22 @@ export const CreateReview = ({user, setUser}) => {
                 <p>Your rating of this movie:</p>
                 <form onSubmit={formHandler}>
                     {/*I think I need to pass in a user here*/}
+
+                    {/*onChange doesn't do anything I need to either create a new onChange or use the previous function from another file and pass it to this file.  */}
                     <select type="number" value={rating} onChange={(event) => setRating(event.target.value)}>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
+                        <option value="">Select Rating (1 low - 10 high)</option>
                         <option value="10">10</option>
+                        <option value="9">9</option>
+                        <option value="8">8</option>
+                        <option value="7">7</option>
+                        <option value="6">6</option>
+                        <option value="5">5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
                     </select>
-                    <input type="submit" value="create review"/>
+                    <input type="submit" name="rating" value="create review" onChange={formHandler} disabled={rating == null}/>
                 </form>
             </div>
         </div>

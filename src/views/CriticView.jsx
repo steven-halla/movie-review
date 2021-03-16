@@ -4,6 +4,7 @@ import {useParams} from "react-router";
 import {getPublicUser} from "../services/user.service";
 
 export const CriticView = (props) => {
+    // descructuring on objects.
     const {user, setUser} = props;
     const {id} = useParams();
 
@@ -20,7 +21,6 @@ export const CriticView = (props) => {
                 <h1>Critic</h1>
             </div>
             <div>
-                {/*user.email is just a temp thing will remove at the end */}
                 <p>ID: {user.id}</p>
                 <p>Name: {user.displayName}</p>
             </div>

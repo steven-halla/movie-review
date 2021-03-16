@@ -2,6 +2,9 @@ import React, {useEffect} from "react";
 import {Link} from 'react-router-dom';
 import {getUsers} from "../services/user.service";
 
+// we are not making adds/deletes to he list, therefore we will set our list to a key named index ( the index of the item)
+// if we add/delete items  then index would not work. In that case we would need the item id number.
+
 export const CriticList = ({users, setUsers}) => {
 
     useEffect(() => {

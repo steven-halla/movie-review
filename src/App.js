@@ -78,6 +78,10 @@ export const App = () => {
                         <MovieView movie={movie} setMovie={setMovie}/>
                     </Route>
 
+                    <Route exact path="/movie/:id/review">
+                        <CreateReview user={user} setUser={setUser} movie={movie} setMovie={setMovie}/>
+                    </Route>
+
                     <Route exact path="/critics">
                         <CriticList users={users} setUsers={setUsers}/>
                     </Route>
@@ -86,22 +90,11 @@ export const App = () => {
                         <CriticView user={user} setUser={setUser}/>
                     </Route>
 
-                    <Route exact path="/critic/movie/:id">
-                        <CreateReview user={user} setUser={setUser} movie={movie} setMovie={setMovie}/>
-                    </Route>
 
                 </Switch>
-                {/*<Home path="/"  />*/}
-                {/*<CriticView path="/critic" />*/}
-                {/*<Login path="/login" />*/}
-                {/*<MovieView path="/movie"/>*/}
-                {/*<Register path="/register"/>*/}
-
 
                 {/*<footer />*/}
             </div>
         </Router>
     );
 }
-
-export default App;

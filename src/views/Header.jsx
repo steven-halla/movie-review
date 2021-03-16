@@ -1,19 +1,14 @@
-import React, {useEffect} from 'react';
-
-//make header for main page first thing i am sure that is what kenny meant either way it needs to be built.
-// I can make a logged in header and a logged out header?
-
+import React from 'react';
 import {isLoggedIn} from "../services/auth.service";
 import {Link} from "react-router-dom";
-
-
 import "./Header.scss";
+
+//This will create a header on every page including our login/reg page
 
 export const Header = (props) => {
     const {user, history} = props;
 
     // const path = history.location.pathname;
-
 
     if (isLoggedIn() && user != null) {
         return (

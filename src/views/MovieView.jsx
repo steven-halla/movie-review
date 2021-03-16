@@ -26,7 +26,7 @@ export const MovieView = (props) => {
                 <p>Rating Average: {movie.rating}</p>
 
                 <p>Your rating of this movie:</p>
-                Review This movie: <Link to={`/critic/movie/${movie.id}`}>Review Movie</Link>
+                Review This movie: <Link to={`/movie/${movie.id}/review`}>Review Movie</Link>
 
             </div>
         </div>
