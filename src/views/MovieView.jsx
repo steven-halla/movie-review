@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useParams} from "react-router";
-import {getPublicMovie} from "../services/movie.service";
+import {getMovie} from "../services/movie.service";
 import {Link} from 'react-router-dom';
 
 export const MovieView = (props) => {
@@ -8,7 +8,7 @@ export const MovieView = (props) => {
     const { id } = useParams();
 
     useEffect(() => {
-        getPublicMovie(id)
+        getMovie(id)
             .then(response => {
                 console.log(response.data);
                 setMovie(response.data);

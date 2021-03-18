@@ -3,16 +3,30 @@ import {authHeader} from "./authHeader";
 
 const API_URL = `http://localhost:7777`;
 
-export const getPublicMovies = () => {
+export const getMovies = () => {
     return axios.get(API_URL + `/movies`);
 };
 
-export const getPublicMovie = (movieId) => {
+export const getMovie = (movieId) => {
     return axios.get(API_URL + `/movies/${movieId}`);
 };
 
-export const createMovieReview = (movieId, rating) => {
-    return axios.put(API_URL + `/movies/${movieId}`, {
+export const updateMovie = (movie) => {
+    return axios.put(API_URL + `/movies/${movie.id}`, {
+        headers: authHeader(),
+        data: movie
+    });
+};
+
+export const makeMovie = (movie) => {
+    return axios.post( API_URL + `/movies`, {
+        headers: authHeader(),
+        data: movie
+    });
+};
+
+export const updateMovieReview = (movieId, rating) => {
+    return axios.patch(API_URL + `/movies/${movieId}/review`, {
         headers: authHeader(),
         data: {
             rating: rating
@@ -20,12 +34,6 @@ export const createMovieReview = (movieId, rating) => {
     });
 };
 
-//maybe authHeader makes it to where the movie list can
-//only be seen if you are logged in?
-export const makeMovie = (movie) => {
-    return axios.post( API_URL + `/movies`, {
-        headers: authHeader(),
-        data: movie
-    });
-};
+
+
 

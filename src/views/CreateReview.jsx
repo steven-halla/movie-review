@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
-import axios from "axios";
 import {history} from "../browserHistory";
 import {useParams} from "react-router";
-import {createMovieReview} from "../services/movie.service";
+import {updateMovieReview} from "../services/movie.service";
 
 // I am thinking I am passing user and movieId the wrong way
 export const CreateReview = ({user}) => {
@@ -17,7 +16,7 @@ export const CreateReview = ({user}) => {
             alert("Please select a rating");
         }
 
-        createMovieReview(id, rating).then(newReview => {
+        updateMovieReview(id, rating).then(newReview => {
             console.log("created movie review:")
             console.log(newReview);
             history.push("/");
@@ -33,9 +32,7 @@ export const CreateReview = ({user}) => {
             <div>
                 <p>Your rating of this movie:</p>
                 <form onSubmit={formHandler}>
-                    {/*I think I need to pass in a user here*/}
 
-                    {/*onChange doesn't do anything I need to either create a new onChange or use the previous function from another file and pass it to this file.  */}
                     <select type="number" value={rating} onChange={(event) => setRating(event.target.value)}>
                         <option value="">Select Rating (1 low - 10 high)</option>
                         <option value="10">10</option>

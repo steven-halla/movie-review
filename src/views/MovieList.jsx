@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import {Link} from 'react-router-dom';
-import {getPublicMovies} from "../services/movie.service";
+import {getMovies} from "../services/movie.service";
 
 // ({ this is to return an object )}
 export const MovieList = ({movies, setMovies}) => {
     useEffect(() => {
-        getPublicMovies()
+        getMovies()
             .then(response => {
                 console.log(response.data);
                 setMovies(response.data);

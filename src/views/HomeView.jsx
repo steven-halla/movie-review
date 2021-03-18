@@ -34,7 +34,7 @@ export const HomeView = (props) => {
             </div>
 
             <div>
-                <img class="movie-image" src="https://deepfocusreview.com/wp-content/uploads/2016/12/aliens.jpg"
+                <img className="movie-image" src="https://deepfocusreview.com/wp-content/uploads/2016/12/aliens.jpg"
                      alt=""/>
                 <p>This is where a random review is going to go!</p>
                 <p>This is where our review score will go based on the total amount of reviews. </p>
@@ -45,7 +45,7 @@ export const HomeView = (props) => {
 
             <div>
 
-                <nav class="navbar navbar-light bg-info">
+                <nav className="navbar navbar-light bg-info">
                     <h1>Like what you see? Connect with us on Social media!</h1>
                     <p><a href="https://www.facebook.com/" target="_blank"><img
                         src="https://cdn1.iconfinder.com/data/icons/logotypes/32/square-facebook-512.png" height="60"
