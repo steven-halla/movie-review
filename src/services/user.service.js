@@ -18,10 +18,7 @@ export const getPublicUser = (userId) => {
 };
 
 export const createUser = (user) => {
-    return axios.post(API_URL + '/users', {
-        headers: authHeader(),
-        data: user
-    });
+    return axios.post(API_URL + '/users', user, {headers: authHeader()});
 };
 
 export const getPublicContent = () => {

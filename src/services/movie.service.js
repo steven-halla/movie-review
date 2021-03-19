@@ -12,26 +12,19 @@ export const getMovie = (movieId) => {
 };
 
 export const updateMovie = (movie) => {
-    return axios.put(API_URL + `/movies/${movie.id}`, {
-        headers: authHeader(),
-        data: movie
-    });
+    return axios.put(API_URL + `/movies/${movie.id}`, movie, {headers: authHeader()});
 };
 
 export const makeMovie = (movie) => {
-    return axios.post( API_URL + `/movies`, {
-        headers: authHeader(),
-        data: movie
-    });
+    return axios.post( API_URL + `/movies`, movie, {headers: authHeader()});
 };
 
-export const updateMovieReview = (movieId, rating) => {
-    return axios.patch(API_URL + `/movies/${movieId}/review`, {
-        headers: authHeader(),
-        data: {
-            rating: rating
-        }
-    });
+export const updateMovieReview = (userId, movieId, rating) => {
+    const requestBody = {
+        userId: userId,
+        rating: rating
+    };
+    return axios.patch(API_URL + `/movies/${movieId}/review`, requestBody, {headers: authHeader()});
 };
 
 

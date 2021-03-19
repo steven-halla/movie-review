@@ -7,16 +7,21 @@ import {updateMovieReview} from "../services/movie.service";
 export const CreateReview = ({user}) => {
     const [rating, setRating] = useState("");
 
-    const { id } = useParams();
+    const { id: movieId } = useParams(); // rename url id to movie id
 
     const formHandler = (event) => {
         event.preventDefault();
 
         if (!rating) {
             alert("Please select a rating");
+            return;
+        }
+        if (!user.id) {
+            alert("Please login, user id is null");
+            return;
         }
 
-        updateMovieReview(id, rating).then(newReview => {
+        updateMovieReview(user.id, movieId, rating).then(newReview => {
             console.log("created movie review:")
             console.log(newReview);
             history.push("/");

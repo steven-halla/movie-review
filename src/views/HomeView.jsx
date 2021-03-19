@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {getUser} from "../services/user.service";
-import {getCurrentAuthedUser} from "../services/getCurrentAuthedUser";
+import {getCurrentUserAuth} from "../services/getCurrentUserAuth";
 import {isLoggedIn} from "../services/auth.service";
 import {history} from "../browserHistory";
 
@@ -14,7 +14,7 @@ export const HomeView = (props) => {
             return;
         }
 
-        const currentUser = getCurrentAuthedUser();
+        const currentUser = getCurrentUserAuth();
         getUser(currentUser.id)
             .then(response => {
                 setUser(response.data);

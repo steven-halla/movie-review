@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Route, Router, Switch} from "react-router";
 import {history} from './browserHistory';
 import {SigninView} from './views/SigninView';
@@ -18,6 +18,8 @@ import './App.scss';
 import {SignoutView} from "./views/SignoutView";
 import {Header} from "./views/Header";
 import {ProfileView} from "./views/ProfileView";
+import {getCurrentUserAuth} from "./services/getCurrentUserAuth";
+import {getUser} from "./services/user.service";
 
 
 export const App = () => {
@@ -39,6 +41,17 @@ export const App = () => {
     //i put this in so that our critic list will display data
     const [users, setUsers] = useState([]);
     const [movies, setMovies] = useState([]);
+
+    // set user state with current logged in user, if needed
+    useEffect(() => {
+        const userAuth = getCurrentUserAuth();
+        if (userAuth != null) {
+            getUser(userAuth.id).then(authedUser => {
+                // console.log(authedUser);
+                setUser(authedUser.data);
+            });
+        }
+    }, []);
 
 
     return (
