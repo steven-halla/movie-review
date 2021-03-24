@@ -103,6 +103,7 @@ export const SigninView = (props) => {
         setMessage("");
         setLoading(true);
 
+        // validate all something is up with this one
         form.current.validateAll();
 
         if (checkBtn.current.context._errors.length === 0) {

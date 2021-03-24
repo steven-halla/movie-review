@@ -3,25 +3,30 @@ import {history} from "../browserHistory";
 import {useParams} from "react-router";
 import {updateMovieReview} from "../services/movie.service";
 
-// I am thinking I am passing user and movieId the wrong way
+// ({user}) this lets us know what we are passing a user with its attributes
 export const CreateReview = ({user}) => {
     const [rating, setRating] = useState("");
+
+    const [writtenReview, setWrittenReview] = useState("");
 
     const { id: movieId } = useParams(); // rename url id to movie id
 
     const formHandler = (event) => {
         event.preventDefault();
 
+        // check to force user to select a rating
         if (!rating) {
             alert("Please select a rating");
             return;
         }
+        // if no user is logged in
         if (!user.id) {
             alert("Please login, user id is null");
             return;
         }
 
-        updateMovieReview(user.id, movieId, rating).then(newReview => {
+        // pass in review next to rating
+        updateMovieReview(user.id, movieId, rating, writtenReview).then(newReview => {
             console.log("created movie review:")
             console.log(newReview);
             history.push("/");
@@ -51,6 +56,12 @@ export const CreateReview = ({user}) => {
                         <option value="2">2</option>
                         <option value="1">1</option>
                     </select>
+                    <br/>
+                    <br/>
+
+                    <textarea name="review" value={writtenReview} id="" cols="10" rows="5" onChange={(event) => setWrittenReview(event.target.value)}></textarea>
+                    <br/>
+
                     <input type="submit" name="rating" value="create review" onChange={formHandler} disabled={rating == null}/>
                 </form>
             </div>

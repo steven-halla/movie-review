@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import {Link} from 'react-router-dom';
-import {getMovies} from "../services/movie.service";
+import {getAllMovies} from "../services/movie.service";
 
 // ({ this is to return an object )}
+// this gets our movies list from an url and returns the data to the user
 export const MovieList = ({movies, setMovies}) => {
     useEffect(() => {
-        getMovies()
+        getAllMovies()
             .then(response => {
                 console.log(response.data);
                 setMovies(response.data);
@@ -32,13 +33,9 @@ const SelectedMovie = ({movie}) => {
     return(
         <section>
             <ul>
-
+                {/*this pulls from the movie_reviews model we still need to join both tables */}
                 <li>
-                    movie title: <p>{movie.title}</p>
-                </li>
-
-                <li>
-                    average rating: <p>{movie.rating}</p>
+                    movie title: <p>{movie.title} {movie.id}</p>
                 </li>
 
                 <li>

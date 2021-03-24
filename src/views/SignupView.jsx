@@ -6,7 +6,6 @@ import {history} from "../browserHistory";
 import {createUser} from "../services/user.service";
 
 
-//line 5 i put props in round brackets
 export const SignupView = (props) => {
     const {user, setUser} = props;
 

@@ -36,6 +36,7 @@ export const App = () => {
     const [movie, setMovie] = useState({
         title: "",
         rating: "",
+        writtenReview: "",
     });
 
     //i put this in so that our critic list will display data
@@ -88,11 +89,11 @@ export const App = () => {
                     </Route>
 
                     <Route exact path="/movies/:id">
-                        <MovieView movie={movie} setMovie={setMovie}/>
+                        <MovieView user={user} setUser={setUser} movie={movie} setMovie={setMovie}/>
                     </Route>
 
                     <Route exact path="/movie/:id/review">
-                        <CreateReview user={user} setUser={setUser} movie={movie} setMovie={setMovie}/>
+                        <CreateReview user={user} setUser={setUser} movie={movie} setMovie={setMovie} />
                     </Route>
 
                     <Route exact path="/critics">
@@ -100,7 +101,7 @@ export const App = () => {
                     </Route>
 
                     <Route exact path="/critics/:id">
-                        <CriticView user={user} setUser={setUser}/>
+                        <CriticView user={user} setUser={setUser} setMovie={setMovie}/>
                     </Route>
 
 
