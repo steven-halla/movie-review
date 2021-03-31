@@ -28,6 +28,7 @@ export const getUserProfile = (userId) => {
     return axios.get(API_URL + `/users/${userId}/profile`);
 };
 
+//maybe i need to put a DB query here.
 export const getUserReviews = (userId) => {
     return axios.get(API_URL + `/users/${userId}/reviews`);
 };

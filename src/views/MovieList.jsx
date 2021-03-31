@@ -46,3 +46,7 @@ const SelectedMovie = ({movie}) => {
         </section>
     );
 }
+
+// once we get both tables connected, movie title should be turned into a link tag
+// have the rating appear to the right of the title
+

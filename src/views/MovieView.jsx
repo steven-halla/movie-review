@@ -52,7 +52,7 @@ export const MovieView = (props) => {
                         {reviews.map(review => (
                             <li>
                                <Link to={`/critics/${review.id}`}>
-                                   <strong>{review.rating}</strong> - "{review.writtenReview}" - "{review.userId}"
+                                   <strong>movie rating:{review.rating}</strong> - writtenReview: "{review.writtenReview}" name of reviewer: {review.user.displayName}
                                </Link>
                             </li>
 

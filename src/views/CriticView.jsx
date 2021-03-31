@@ -49,13 +49,18 @@ export const CriticView = (props) => {
                 {reviews.map(review => (
                     //currently this grabs movie ids that match with user id
                     <li>
-                        <strong>{review.writtenReview}</strong>
+                        <strong>Movie:{review.movie.title}</strong>
+                        <br/>
+                        <strong>rating: {review.rating}</strong>
+                        <br/>
+                        <strong>written review: {review.writtenReview}</strong>
                     </li>
                 ))}
             </ol>
             <div>
                 <p>ID: {user.id}</p>
                 <p>Name: {user.displayName}</p>
+
 
             </div>
         </div>
