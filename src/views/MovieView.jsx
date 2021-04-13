@@ -1,13 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useParams} from "react-router";
 import {getMovie, getMovieReviews} from "../services/movie.service";
 import {Link} from 'react-router-dom';
 import {getUserProfile,getAllUsers, getUser} from "../services/user.service";
+import {UserContext} from "../services/user.context";
+import {MovieContext} from "../services/movie.context";
 
 
-export const MovieView = (props) => {
-    const {movie, setMovie} = props;
-    const {user, setUser} = props;
+
+export const MovieView = () => {
+    const { movie, setMovie } = useContext(MovieContext);
+
+    const { setUser } = useContext(UserContext);
     const {id} = useParams();
     const {userId} = useParams();
 

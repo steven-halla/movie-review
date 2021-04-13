@@ -1,11 +1,13 @@
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import {Link} from 'react-router-dom';
 import {getUsers} from "../services/user.service";
+import {UserContext} from "../services/user.context";
 
 // we are not making adds/deletes to he list, therefore we will set our list to a key named index ( the index of the item)
 // if we add/delete items  then index would not work. In that case we would need the item id number.
 
-export const CriticList = ({users, setUsers}) => {
+export const CriticList = () => {
+    const { users, setUsers } = useContext(UserContext);
 
     useEffect(() => {
         getUsers()
@@ -14,6 +16,7 @@ export const CriticList = ({users, setUsers}) => {
             });
 
     }, []);
+
     return (
         <div>
             <div className="loginbgcolor">

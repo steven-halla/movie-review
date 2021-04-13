@@ -1,10 +1,16 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {history} from "../browserHistory";
 import {useParams} from "react-router";
 import {updateMovieReview} from "../services/movie.service";
+import {UserContext} from "../services/user.context";
+
+// *** create react context check below for specific ***
+//create user context
+
 
 // ({user}) this lets us know what we are passing a user with its attributes
-export const CreateReview = ({user}) => {
+export const CreateReview = () => {
+    const { user } = useContext(UserContext);
     const [rating, setRating] = useState("");
 
     const [writtenReview, setWrittenReview] = useState("");

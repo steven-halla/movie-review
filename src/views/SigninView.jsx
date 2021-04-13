@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react";
+import React, {useState, useRef, useContext} from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
@@ -7,6 +7,7 @@ import {signin} from "../services/auth.service";
 import {history} from '../browserHistory';
 // import {} from "../services/auth.service";
 import {Link} from 'react-router-dom';
+import {UserContext} from "../services/user.context";
 // import AuthService from "../services/auth.service";
 
 const required = value => {
@@ -44,8 +45,8 @@ const validPassword = (value) => {
 //     setUser: (user: User) => void;
 // }
 // export const SigninView = props => { // same as with ()
-export const SigninView = (props) => {
-    const {user, setUser} = props;
+export const SigninView = () => {
+    const { user, setUser } = useContext(UserContext);
 
     const form = useRef();
     const checkBtn = useRef();

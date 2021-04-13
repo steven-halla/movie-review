@@ -1,12 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {isLoggedIn} from "../services/auth.service";
 import {Link} from "react-router-dom";
 import "./Header.scss";
+import {UserContext} from "../services/user.context";
 
-//This will create a header on every page including our login/reg page
+// This will create a header on every page including our login/reg page
 
-export const Header = (props) => {
-    const {user, history} = props;
+export const Header = () => {
+    const { user } = useContext(UserContext);
 
     // const path = history.location.pathname;
 

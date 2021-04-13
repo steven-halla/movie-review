@@ -1,16 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 import {useParams} from "react-router";
 import {getUserProfile, getUserReviews} from "../services/user.service";
 
 import {getMovie, getMovieReviews} from "../services/movie.service";
 import {Link} from 'react-router-dom';
+import {UserContext} from "../services/user.context";
 
 export const CriticView = (props) => {
     // descructuring on objects.
-    const {user, setUser} = props;
-    const {id} = useParams();//
-    const {movie, setMovie} = props;
+    const { user, setUser } = useContext(UserContext);
+
+    const {id} = useParams();
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {

@@ -1,10 +1,16 @@
-import React, { useEffect } from "react";
+import React, {useContext, useEffect} from "react";
 import {Link} from 'react-router-dom';
 import {getAllMovies} from "../services/movie.service";
+import {UserContext} from "../services/user.context";
+import {MovieContext} from "../services/movie.context";
 
 // ({ this is to return an object )}
 // this gets our movies list from an url and returns the data to the user
-export const MovieList = ({movies, setMovies}) => {
+export const MovieList = () => {
+    const { movies, setMovies } = useContext(MovieContext);
+
+
+
     useEffect(() => {
         getAllMovies()
             .then(response => {
@@ -28,8 +34,10 @@ export const MovieList = ({movies, setMovies}) => {
 
     );
 };
+//check postman lets change url to inlcude url
+const SelectedMovie = (props) => {
+    const movie = props.movie;
 
-const SelectedMovie = ({movie}) => {
     return(
         <section>
             <ul>

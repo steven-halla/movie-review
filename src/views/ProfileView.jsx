@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 
 import {Link} from "react-router-dom";
+import {UserContext} from "../services/user.context";
 
-export const ProfileView = (props) => {
-    const {user} = props;
+export const ProfileView = () => {
+    const { user } = useContext(UserContext);
 
     return (
         <div>

@@ -1,13 +1,11 @@
-import React, {useState} from 'react';
-import axios from "axios";
-
-import {signin, signup} from "../services/auth.service";
+import React, {useContext, useState} from 'react';
+import {signup} from "../services/auth.service";
 import {history} from "../browserHistory";
-import {createUser} from "../services/user.service";
+import {UserContext} from "../services/user.context";
 
 
-export const SignupView = (props) => {
-    const {user, setUser} = props;
+export const SignupView = () => {
+    const {user, setUser} = useContext(UserContext);
 
     const [emailError, setEmailError] = useState("");
     const [displayNameError, setDisplayNameError] = useState("");

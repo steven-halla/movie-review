@@ -1,12 +1,13 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {getUser} from "../services/user.service";
 import {getCurrentUserAuth} from "../services/getCurrentUserAuth";
 import {isLoggedIn} from "../services/auth.service";
 import {history} from "../browserHistory";
+import {UserContext} from "../services/user.context";
 
-export const HomeView = (props) => {
-    const {user, setUser} = props;
+export const HomeView = () => {
+    const { setUser } = useContext(UserContext);;
 
     useEffect(() => {
         if (!isLoggedIn()) {
