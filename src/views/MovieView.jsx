@@ -2,16 +2,15 @@ import React, {useContext, useEffect, useState} from 'react';
 import {useParams} from "react-router";
 import {getMovie, getMovieReviews} from "../services/movie.service";
 import {Link} from 'react-router-dom';
-import {getUserProfile,getAllUsers, getUser} from "../services/user.service";
+import {getUsers} from "../services/user.service";
 import {UserContext} from "../services/user.context";
 import {MovieContext} from "../services/movie.context";
 
 
-
 export const MovieView = () => {
-    const { movie, setMovie } = useContext(MovieContext);
+    const {movie, setMovie} = useContext(MovieContext);
 
-    const { setUser } = useContext(UserContext);
+    const {setUser} = useContext(UserContext);
     const {id} = useParams();
     const {userId} = useParams();
 
@@ -33,8 +32,8 @@ export const MovieView = () => {
             });
     }, []);
 
-    useEffect( () => {
-        getAllUsers()
+    useEffect(() => {
+        getUsers()
             .then(response => {
                 console.log(response.data);
                 setUser(response.data);
@@ -55,9 +54,10 @@ export const MovieView = () => {
                     <ol>
                         {reviews.map(review => (
                             <li>
-                               <Link to={`/critics/${review.id}`}>
-                                   <strong>movie rating:{review.rating}</strong> - writtenReview: "{review.writtenReview}" name of reviewer: {review.user.displayName}
-                               </Link>
+                                <Link to={`/critics/${review.id}`}>
+                                    <strong>movie rating:{review.rating}</strong> - writtenReview:
+                                    "{review.writtenReview}" name of reviewer: {review.user.displayName}
+                                </Link>
                             </li>
 
 

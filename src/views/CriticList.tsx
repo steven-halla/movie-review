@@ -1,17 +1,19 @@
-import React, {useContext, useEffect} from "react";
+import React, {FC, useContext, useEffect} from "react";
 import {Link} from 'react-router-dom';
 import {getUsers} from "../services/user.service";
 import {UserContext} from "../services/user.context";
+import {AxiosResponse} from "axios";
+import {User} from "../model/User";
 
 // we are not making adds/deletes to he list, therefore we will set our list to a key named index ( the index of the item)
 // if we add/delete items  then index would not work. In that case we would need the item id number.
 
-export const CriticList = () => {
+export const CriticList: FC = () => {
     const { users, setUsers } = useContext(UserContext);
 
     useEffect(() => {
         getUsers()
-            .then(response => {
+            .then((response: AxiosResponse<User[]>) => {
                 setUsers(response.data);
             });
 
@@ -26,14 +28,18 @@ export const CriticList = () => {
                 {users.map((user, index) => (
                     <CriticUser key={index} user={user}/>
                 ))}
-
             </div>
         </div>
 
     );
 };
 
-const CriticUser = ({user}) => {
+interface CriticUserProps {
+    user: User;
+}
+// FC<CriticsUserProps> <-- this is called "generics", google "typescript basic generics" "what is generics"
+const CriticUser: FC<CriticUserProps> = (props) => {
+    const { user } = props;
     return (
         <section>
             <ul>
