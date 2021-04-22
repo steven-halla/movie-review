@@ -3,13 +3,11 @@ import React, {useContext, useEffect, useState} from 'react';
 import {useParams} from "react-router";
 import {getUserProfile, getUserReviews} from "../services/user.service";
 
-import {getMovie, getMovieReviews} from "../services/movie.service";
-import {Link} from 'react-router-dom';
 import {UserContext} from "../services/user.context";
 
 export const CriticView = (props) => {
     // descructuring on objects.
-    const { user, setUser } = useContext(UserContext);
+    const { userProfile, setUserProfile } = useState({});
 
     const {id} = useParams();
     const [reviews, setReviews] = useState([]);
@@ -17,7 +15,7 @@ export const CriticView = (props) => {
     useEffect(() => {
         getUserProfile(id)
             .then(response => {
-                setUser(response.data);
+                setUserProfile(response.data);
             });
     }, []);
 
@@ -59,8 +57,8 @@ export const CriticView = (props) => {
                 ))}
             </ol>
             <div>
-                <p>ID: {user.id}</p>
-                <p>Name: {user.displayName}</p>
+                <p>ID: {userProfile.id}</p>
+                <p>Name: {userProfile.displayName}</p>
 
 
             </div>
