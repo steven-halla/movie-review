@@ -10,12 +10,12 @@ import {UserContext} from "../services/user.context";
 
 // ({user}) this lets us know what we are passing a user with its attributes
 export const CreateReview = () => {
-    const { user } = useContext(UserContext);
+    const {user} = useContext(UserContext);
     const [rating, setRating] = useState("");
 
     const [writtenReview, setWrittenReview] = useState("");
 
-    const { id: movieId } = useParams(); // rename url id to movie id
+    const {id: movieId} = useParams(); // rename url id to movie id
 
     const formHandler = (event) => {
         event.preventDefault();
@@ -32,7 +32,13 @@ export const CreateReview = () => {
         }
 
         // pass in review next to rating
-        updateMovieReview(user.id, movieId, rating, writtenReview).then(newReview => {
+        const request /*: MovieReviewUpdateRequest */ = {
+            userId: user.id,
+            movieId: movieId,
+            rating: rating,
+            writtenReview: writtenReview
+        };
+        updateMovieReview(request).then(newReview => {
             console.log("created movie review:")
             console.log(newReview);
             history.push("/");
@@ -65,10 +71,12 @@ export const CreateReview = () => {
                     <br/>
                     <br/>
 
-                    <textarea name="review" value={writtenReview} id="" cols="10" rows="5" onChange={(event) => setWrittenReview(event.target.value)}></textarea>
+                    <textarea name="review" value={writtenReview} id="" cols="10" rows="5"
+                              onChange={(event) => setWrittenReview(event.target.value)}></textarea>
                     <br/>
 
-                    <input type="submit" name="rating" value="create review" onChange={formHandler} disabled={rating == null}/>
+                    <input type="submit" name="rating" value="create review" onChange={formHandler}
+                           disabled={rating == null}/>
                 </form>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {ChangeEvent, FC, useContext, useState} from 'react';
 import {signup} from "../services/auth.service";
 import {history} from "../browserHistory";
 import {UserContext} from "../services/user.context";
@@ -14,15 +14,16 @@ export const SignupView = () => {
     const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
     // not fully sure on how to read all of this
-    const onChange = event => {
+    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
         console.log('event.target.value =', event.target.value)
+        // @ts-ignore
         setUser({
             ...user,
             [event.target.name]: event.target.value
         });
     };
 
-    const onChangeEmail = (event) => {
+    const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
         onChange(event);
         if (!event.target.value) {
             setEmailError("");
@@ -35,7 +36,7 @@ export const SignupView = () => {
         }
     };
 
-    const onChangeDisplayName = (event) => {
+    const onChangeDisplayName = (event: React.ChangeEvent<HTMLInputElement>) => {
         onChange(event);
         if (!event.target.value) {
             setDisplayNameError("");
@@ -48,7 +49,7 @@ export const SignupView = () => {
         }
     };
 
-    const onChangePassword = (event) => {
+    const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
         onChange(event);
         if (!event.target.value) {
             setPasswordError("");
@@ -61,16 +62,19 @@ export const SignupView = () => {
         }
     };
 
-    const onChangeConfirmPassword = (event) => {
+    const onChangeConfirmPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
         onChange(event);
         if (!event.target.value) {
             setConfirmPasswordError("");
 
-        } else if (event.target.value !== user.password) {
+        } else { // @ts-ignore
+            if (event.target.value !== user.password) {
 
-        } else {
-            setConfirmPasswordError("");
+                    } else {
+                        setConfirmPasswordError("");
+                    }
         }
+        // @ts-ignore
         setUser({
             ...user,
             [event.target.name]: event.target.value,
@@ -86,6 +90,7 @@ export const SignupView = () => {
     // };
 
     const handleSignup = () => {
+        // @ts-ignore
         signup(user.email, user.password, user.displayName).then(response => {
             // check response for error;
             history.push("/signin");

@@ -1,6 +1,7 @@
 import axios, {AxiosResponse} from 'axios';
-import {CreateUserRequest, User, UserMovieReview, UserProfile} from 'model/User';
+import {CreateUserRequest, User, UserProfile} from 'model/User';
 import {authHeader} from "./authHeader";
+import {MovieReview} from "../model/Movie";
 
 
 // should we delete api from the URL below?
@@ -24,15 +25,15 @@ export const getUserProfile = (userId: number): Promise<AxiosResponse<UserProfil
 };
 
 //maybe i need to put a DB query here.
-export const getUserReviews = (userId: number): Promise<AxiosResponse<UserMovieReview[]>> => {
+export const getUserReviews = (userId: number): Promise<AxiosResponse<MovieReview[]>> => {
     return axios.get(API_URL + `/users/${userId}/reviews`);
 };
 
 
 // we won't add types to these yet since they are just for test/demo
-export const getPublicContent = () => {
-    return axios.get(API_URL + "/api/test/all");
-};
+// export const getPublicContent = () => {
+//     return axios.get(API_URL + "/api/test/all");
+// };
 
 export const getUserBoard = () => {
     return axios.get(API_URL + "/api/test/user", {headers: authHeader()});
@@ -41,7 +42,7 @@ export const getUserBoard = () => {
 export const getModeratorBoard = () => {
     return axios.get(API_URL + "/api/test/mod", {headers: authHeader()});
 };
-
-export const getAdminBoard = () => {
-    return axios.get(API_URL + "/api/test/admin", {headers: authHeader()});
-};
+//
+// export const getAdminBoard = () => {
+//     return axios.get(API_URL + "/api/test/admin", {headers: authHeader()});
+// };

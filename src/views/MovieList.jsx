@@ -1,57 +1,72 @@
 import React, {useContext, useEffect} from "react";
 import {Link} from 'react-router-dom';
 import {getAllMovies} from "../services/movie.service";
-import {UserContext} from "../services/user.context";
 import {MovieContext} from "../services/movie.context";
+import {ViewHeader} from "./ViewHeader";
+import {Grid, Paper} from "@material-ui/core";
+import styled from "styled-components";
+
+const StyledMovieListDiv = styled.div`
+  // & means "this"
+  &.movie-list {
+    max-width: 800px;
+    margin: auto;
+
+    .movies {
+      .movie {
+        height: 200px;
+
+        .movie-paper {
+          height: 100%;
+
+          &:hover {
+            background-color: #eee;
+          }
+        }
+      }
+    }
+  }
+`;
 
 // ({ this is to return an object )}
 // this gets our movies list from an url and returns the data to the user
 export const MovieList = () => {
-    const { movies, setMovies } = useContext(MovieContext);
-
-
+    const {movies, setMovies} = useContext(MovieContext);
 
     useEffect(() => {
         getAllMovies()
             .then(response => {
-                console.log(response.data);
+                // console.log("movies")
+                // console.log(response.data);
                 setMovies(response.data);
             })
 
     }, []);
-
     return (
-        <div>
-            <div className="loginbgcolor">
-                <h1>Movies</h1>
-            </div>
-            <div>
+        <StyledMovieListDiv className="movie-list">
+            <ViewHeader text={"Movies"}/>
+            <Grid container spacing={1} direction="row" className="movies">
                 {movies.map((movie, index) => (
-                    <SelectedMovie key={index} movie={movie} />
+                    <MovieView key={index} movie={movie}/>
                 ))}
-            </div>
-        </div>
-
+            </Grid>
+        </StyledMovieListDiv>
     );
 };
 //check postman lets change url to inlcude url
-const SelectedMovie = (props) => {
-    const movie = props.movie;
+const MovieView = (props) => {
+    const {movie} = props;
 
-    return(
-        <section>
-            <ul>
-                {/*this pulls from the movie_reviews model we still need to join both tables */}
-                <li>
-                    movie title: <p>{movie.title} {movie.id}</p>
-                </li>
-
-                <li>
-                    Check out full stats <Link to={`movies/${movie.id}`}>Movie stats</Link>
-                </li>
-
-            </ul>
-        </section>
+    return (
+        <Grid item xs={12} sm={6} md={3} className="movie">
+            <Link to={`movies/${movie.id}`}>
+                <Paper elevation={3} className="movie-paper">
+                    <div>
+                        <h2>{movie.title}</h2>
+                    </div>
+                </Paper>
+            </Link>
+        </Grid>
     );
 }
 
