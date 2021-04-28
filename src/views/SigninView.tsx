@@ -5,6 +5,8 @@ import {signin} from "../services/auth.service";
 import {history} from '../browserHistory';
 import {UserContext} from "../services/user.context";
 import {SignInRequest} from "../model/User";
+import {Box, Input, Paper, TextField, Button} from "@material-ui/core";
+import styled from "styled-components";
 
 const required = (value: any) => {
     if (!value) {
@@ -125,27 +127,27 @@ export const SigninView: FC = () => {
                 {/* migrate away from onSubmit and forms and just have a button down blow with and onClick={handleSignin}*/}
 
                 <div className="form-group">
-                    <label htmlFor="email">Email: </label>
+                    <label htmlFor="email"> </label>
                     {/*value={email} we took this out from inline input tag*/}
-                    <input type="text" name="email" onChange={onChangeEmail} className="form-control"
+                    <TextField id="outlined-basic" label="Email" variant="outlined"type="text" name="email" onChange={onChangeEmail} className="form-control"
                         // validations={[required, validEmail]}
                     />
                     <p>{emailError}</p>
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="password">Password: </label>
-                    <input type="password" name="password" className="form-control" onChange={onChangePassword}/>
+                    <label htmlFor="password"> </label>
+                    <TextField id="outlined-basic" label="password" variant="outlined"type="password" name="password" className="form-control" onChange={onChangePassword}/>
                     <p> {passwordError}</p>
                 </div>
 
                 <div className="form-group">
-                    <button onClick={handleSignIn} className="btn btn-primary btn-block" disabled={loading}>
+                    <Button variant="contained" color="primary" onClick={handleSignIn} className="btn btn-primary btn-block" disabled={loading}>
                         {loading && (
                             <span className="spinner-border spinner-border-sm"/>
                         )}
                         <span>Sign In</span>
-                    </button>
+                    </Button>
                 </div>
 
                 {message && (

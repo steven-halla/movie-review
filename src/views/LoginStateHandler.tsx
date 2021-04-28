@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {isLoggedIn} from "../services/auth.service";
 
-export const LoginStateHandler = (props) => {
+export const LoginStateHandler = (props: { history: any; }) => {
     const {history} = props;
 
     useEffect(() => {

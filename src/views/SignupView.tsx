@@ -2,6 +2,45 @@ import React, {ChangeEvent, FC, useContext, useState} from 'react';
 import {signup} from "../services/auth.service";
 import {history} from "../browserHistory";
 import {UserContext} from "../services/user.context";
+import {Box, Input, Paper, TextField, Button} from "@material-ui/core";
+import styled from "styled-components";
+
+const SignUpViewDiv = styled.div `
+
+
+  &.signupbox {
+    background-color: #eeeeee;
+    width: 400px;
+
+    padding: 10px;
+    border-radius: 25px;
+    color: red;
+    max-width: 800px;
+    margin: auto;
+    
+
+    
+  }
+  
+
+  .email-input {
+    margin-right: auto;
+    color: blue;
+  }
+  
+  .page-wrap {
+    background-color: #282c34;
+  }
+    
+    
+    
+    
+    
+`;
+
+
+
+
 
 
 export const SignupView = () => {
@@ -98,47 +137,49 @@ export const SignupView = () => {
     }
 
     return (
-        <div>
+
+        <Box className="page-wrap">
 
             <div className="loginbgcolor">
                 <h1>Sign Up</h1>
             </div>
-
-            <div className={"loginbox"}>
-
-
-                <div>
-                    <label htmlFor="email">Email: </label>
-                    <input type="text" name="email" onChange={onChangeEmail}/>
-                    <p>{emailError}</p>
-                </div>
-
-                <div>
-                    <label htmlFor="displayName">Display Name: </label>
-                    <input type="text" name="displayName" onChange={onChangeDisplayName}/>
-                    <p>{displayNameError}</p>
-                </div>
-
-                <div>
-                    <label htmlFor="password">Password: </label>
-                    <input type="password" name="password" onChange={onChangePassword}/>
-                    <p> {passwordError}</p>
-                </div>
-
-                <div>
-                    {/*I might need to change confirm password in htmlFor and name to password if it breaks.*/}
-                    <label htmlFor="confirmPassword">Confirm Password:</label>
-                    <input type="password" name="confirmPassword" onChange={onChangeConfirmPassword}/>
-                    <p>{confirmPasswordError}</p>
-                </div>
-
-                <button onClick={handleSignup}>
-                    Create User
-                </button>
+            <SignUpViewDiv className="signupbox">
+                <Box>
 
 
-            </div>
-        </div>
+                    <Box className="email-input">
+                        <label htmlFor="email"> </label>
+                        <TextField id="outlined-basic" label="Email" variant="outlined" type="text" name="email" onChange={onChangeEmail}/>
+                        <p>{emailError}</p>
+                    </Box>
+
+                    <Box>
+                        <label htmlFor="displayName"> </label>
+                        <TextField id="outlined-basic" label="DisplayName" variant="outlined"type="text" name="displayName" onChange={onChangeDisplayName}/>
+                        <p>{displayNameError}</p>
+                    </Box>
+
+                    <Box>
+                        <label htmlFor="password"> </label>
+                        <TextField id="outlined-basic" label="Password" variant="outlined"type="password" name="password" onChange={onChangePassword}/>
+                        <p> {passwordError}</p>
+                    </Box>
+
+                    <Box>
+                        {/*I might need to change confirm password in htmlFor and name to password if it breaks.*/}
+                        <label htmlFor="confirmPassword"></label>
+                        <TextField id="outlined-basic" label="Confirm Password" variant="outlined"type="password" name="confirmPassword" onChange={onChangeConfirmPassword}/>
+                        <p>{confirmPasswordError}</p>
+                    </Box>
+
+                    <Button variant="contained" color="primary" onClick={handleSignup}>
+                        Create User
+                    </Button>
+
+
+                </Box>
+            </SignUpViewDiv>
+        </Box>
 
     );
 }

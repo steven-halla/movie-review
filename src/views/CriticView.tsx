@@ -1,9 +1,52 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useContext, useEffect, useState} from 'react';
+
 
 import {useParams} from "react-router";
 import {getUserProfile, getUserReviews} from "../services/user.service";
-import {User, UserProfile} from "../model/User";
+import {UserProfile} from "../model/User";
 import {ViewHeader} from "./ViewHeader";
+import {Box, Paper} from "@material-ui/core";
+import styled from "styled-components";
+import {getMovie} from "../services/movie.service";
+import {MovieContext} from "../services/movie.context";
+
+
+//
+
+const CriticViewDiv = styled.div`
+  &.critic-view {
+    max-width: 800px;
+    margin: auto;
+    background-color: #eeeeee;
+    
+    .written-review {
+      color: red;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+      padding-left: 10px;
+      margin-left: 10px;
+    }
+    
+    .critic-header-name {
+      font-family: "Avenir Next Condensed";
+      font-size: xx-large;
+      color:green;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+      padding-left: 10px;
+      margin-left: 10px;
+    }
+    
+    .critic-review-list {
+      margin: 10px;
+    }
+
+      
+    
+
+  }
+  `;
+
 
 
 // on line 9 we pass in (prop) I'm going to delete it
@@ -13,6 +56,7 @@ export const CriticView: FC = () => {
     // we get this info from the user ID (getUserProfile from userservices)
     // i had userprofle wrapped in curly bracers and had it changed to square brackets
     const [userProfile, setUserProfile] = useState<UserProfile>({} as UserProfile);
+    const { movie, setMovie} = useContext(MovieContext);
 
     let id: number;
     // @ts-ignore
@@ -27,14 +71,14 @@ export const CriticView: FC = () => {
             });
     }, []);
 
-    // useEffect( () => {
-    //     getMovie(id)
-    //         .then(response => {
-    //             console.log(response.data);
-    //             setMovie(response.data);
-    //         });
-    //     mnuiv
-    // }, []);
+    useEffect( () => {
+        getMovie(id)
+            .then(response => {
+                console.log(response.data);
+                setMovie(response.data);
+            });
+
+    }, []);
 
     useEffect(() => {
         getUserReviews(id)
@@ -51,30 +95,43 @@ export const CriticView: FC = () => {
 
 
     return (
+        <CriticViewDiv className="critic-view">
             <div>
-                <ViewHeader text="Critic" />
-                <ol>
-                    {reviews.map(({movie, rating, writtenReview}) => {
-                        // @ts-ignore
-                        const {title} = movie;
-                        return (
-                            //currently this grabs movie ids that match with user id
-                            <li>
-                                <strong>Movie:{title}</strong>
-                                <br/>
-                                <strong>rating: {rating}</strong>
-                                <br/>
-                                <strong>written review: {writtenReview}</strong>
-                            </li>
-                        );
-                    })}
-                </ol>
-                <div>
-                    <p>ID: {userProfile.id}</p>
-                    <p>Name: {userProfile.displayName}</p>
 
 
-                </div>
+                <ViewHeader text="Critic"/>
+                <Box className="critic-header-name">
+                    <p> {userProfile.displayName}</p>
+
+
+                </Box>
+                <Box className="critic-reviews">
+
+                        {reviews.map(({ title, rating, writtenReview}) => {
+                            // const {title} = movie;
+                            // @ts-ignore
+                            const {title: title1} = movie;
+                            return (
+                                //currently this grabs movie ids that match with user id
+                                <Paper className="critic-review-list"  elevation={11}>
+                                    <li>
+                                        <strong>Movie:{title1}</strong>
+                                        <br/>
+                                        <br/>
+                                        <strong>rating: {rating}</strong>
+                                        <br/>
+                                        <br/>
+                                        <strong className="written-review">written review: {writtenReview}</strong>
+                                        <br/>
+                                        <br/>
+                                    </li>
+                                </Paper>
+
+                            );
+                        })}
+                </Box>
+
             </div>
+        </CriticViewDiv>
         );
     };

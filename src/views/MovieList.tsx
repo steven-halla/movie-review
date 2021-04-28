@@ -5,6 +5,7 @@ import {MovieContext} from "../services/movie.context";
 import {ViewHeader} from "./ViewHeader";
 import {Grid, Paper} from "@material-ui/core";
 import styled from "styled-components";
+import {Movie} from "../model/Movie";
 
 const StyledMovieListDiv = styled.div`
   // & means "this"
@@ -54,7 +55,7 @@ export const MovieList = () => {
     );
 };
 //check postman lets change url to inlcude url
-const MovieView = (props) => {
+const MovieView = (props: { movie: Movie; }) => {
     const {movie} = props;
 
     return (
