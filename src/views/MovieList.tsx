@@ -45,7 +45,6 @@ export const MovieList = () => {
     }, []);
     return (
         <StyledMovieListDiv className="movie-list">
-            <ViewHeader text={"Movies"}/>
             <Grid container spacing={1} direction="row" className="movies">
                 {movies.map((movie, index) => (
                     <MovieView key={index} movie={movie}/>

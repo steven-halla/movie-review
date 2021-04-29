@@ -1,10 +1,12 @@
 import React, {FC, useContext, useEffect} from "react";
 import {signout} from "../services/auth.service";
-import {history} from "../browserHistory";
 import {UserContext} from "../services/user.context";
+import {RouteComponentProps} from "react-router";
+import {withRouter} from "react-router-dom";
 
-export const SignoutView: FC = () => {
-    const { setUser } = useContext(UserContext);
+const RouterlessSignoutView: FC<RouteComponentProps> = (props) => {
+    const {history} = props;
+    const {setUser} = useContext(UserContext);
 
     useEffect(() => {
         // since <Header depends on user, calling setUser will cause the <Header> component to re-render.
@@ -14,6 +16,7 @@ export const SignoutView: FC = () => {
         history.replace("/signin");
     }, []);
 
-    return <></>;
+    return null;
 }
 
+export const SignoutView = withRouter(RouterlessSignoutView);

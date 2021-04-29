@@ -6,10 +6,8 @@ import {MovieContext} from "services/movie.context";
 import {Movie, MovieReview} from "model/Movie";
 import {AxiosResponse} from "axios";
 import styled from "styled-components";
-import {Box, Button, Grid, Paper} from "@material-ui/core";
-import {ViewHeader} from "./ViewHeader";
+import {Box, Button, Paper} from "@material-ui/core";
 
-// import './MovieReview.scss';
 const MovieViewDiv = styled.div`
   &.movie-view {
     max-width: 800px;
@@ -73,8 +71,6 @@ export const MovieView = () => {
 
     return (
         <MovieViewDiv className="movie-view">
-            <ViewHeader text={movie?.title}/>
-
             <div className="average-rating">
                 average rating: {averageRating} / 10
             </div>
@@ -83,14 +79,18 @@ export const MovieView = () => {
                     className="leave-review-button"
                     variant="contained"
                     color="primary"
-                    href={`/movie/${id}/review`}
+                    href={`/movies/${id}/review`}
                 >
                     Leave Review
                 </Button>
             </Box>
 
             <Box className="movie-reviews">
-                {reviews.map((review: MovieReview, i: number) => (
+                {reviews
+                    .sort((a: MovieReview, b: MovieReview) => {
+                        return b.id - a.id;
+                    })
+                    .map((review: MovieReview, i: number) => (
                     <Paper key={i} className="movie-review" elevation={3}>
                         <Link to={`/critics/${review.user.id}`}>
                             <strong>rating: {review.rating}</strong>

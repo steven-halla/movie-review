@@ -1,13 +1,12 @@
 import React, {ChangeEvent, FC, useContext, useState} from 'react';
 import {signup} from "../services/auth.service";
-import {history} from "../browserHistory";
 import {UserContext} from "../services/user.context";
-import {Box, Input, Paper, TextField, Button} from "@material-ui/core";
+import {Box, TextField, Button} from "@material-ui/core";
 import styled from "styled-components";
+import {RouteComponentProps} from "react-router";
+import {withRouter} from "react-router-dom";
 
-const SignUpViewDiv = styled.div `
-
-
+const SignUpViewDiv = styled.div`
   &.signupbox {
     background-color: #eeeeee;
     width: 400px;
@@ -17,33 +16,24 @@ const SignUpViewDiv = styled.div `
     color: red;
     max-width: 800px;
     margin: auto;
-    
 
-    
+
   }
-  
+
 
   .email-input {
     margin-right: auto;
     color: blue;
   }
-  
+
   .page-wrap {
     background-color: #282c34;
   }
-    
-    
-    
-    
-    
 `;
 
 
-
-
-
-
-export const SignupView = () => {
+const RouterlessSignupView: FC<RouteComponentProps> = (props) => {
+    const {history} = props;
     const {user, setUser} = useContext(UserContext);
 
     const [emailError, setEmailError] = useState("");
@@ -109,9 +99,9 @@ export const SignupView = () => {
         } else { // @ts-ignore
             if (event.target.value !== user.password) {
 
-                    } else {
-                        setConfirmPasswordError("");
-                    }
+            } else {
+                setConfirmPasswordError("");
+            }
         }
         // @ts-ignore
         setUser({
@@ -137,49 +127,45 @@ export const SignupView = () => {
     }
 
     return (
-
         <Box className="page-wrap">
-
-            <div className="loginbgcolor">
-                <h1>Sign Up</h1>
-            </div>
             <SignUpViewDiv className="signupbox">
                 <Box>
-
-
                     <Box className="email-input">
-                        <label htmlFor="email"> </label>
-                        <TextField id="outlined-basic" label="Email" variant="outlined" type="text" name="email" onChange={onChangeEmail}/>
+                        <label htmlFor="email"/>
+                        <TextField id="outlined-basic" label="Email" variant="outlined" type="text" name="email"
+                                   onChange={onChangeEmail}/>
                         <p>{emailError}</p>
                     </Box>
 
                     <Box>
-                        <label htmlFor="displayName"> </label>
-                        <TextField id="outlined-basic" label="DisplayName" variant="outlined"type="text" name="displayName" onChange={onChangeDisplayName}/>
+                        <label htmlFor="displayName"/>
+                        <TextField id="outlined-basic" label="DisplayName" variant="outlined" type="text"
+                                   name="displayName" onChange={onChangeDisplayName}/>
                         <p>{displayNameError}</p>
                     </Box>
 
                     <Box>
-                        <label htmlFor="password"> </label>
-                        <TextField id="outlined-basic" label="Password" variant="outlined"type="password" name="password" onChange={onChangePassword}/>
+                        <label htmlFor="password"/>
+                        <TextField id="outlined-basic" label="Password" variant="outlined" type="password"
+                                   name="password" onChange={onChangePassword}/>
                         <p> {passwordError}</p>
                     </Box>
 
                     <Box>
                         {/*I might need to change confirm password in htmlFor and name to password if it breaks.*/}
-                        <label htmlFor="confirmPassword"></label>
-                        <TextField id="outlined-basic" label="Confirm Password" variant="outlined"type="password" name="confirmPassword" onChange={onChangeConfirmPassword}/>
+                        <label htmlFor="confirmPassword"/>
+                        <TextField id="outlined-basic" label="Confirm Password" variant="outlined" type="password"
+                                   name="confirmPassword" onChange={onChangeConfirmPassword}/>
                         <p>{confirmPasswordError}</p>
                     </Box>
 
                     <Button variant="contained" color="primary" onClick={handleSignup}>
                         Create User
                     </Button>
-
-
                 </Box>
             </SignUpViewDiv>
         </Box>
-
     );
 }
+
+export const SignupView = withRouter(RouterlessSignupView);

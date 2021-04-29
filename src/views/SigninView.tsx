@@ -1,12 +1,10 @@
-import React, {useState, useRef, useContext, FC, MouseEvent, ChangeEvent} from "react";
-
+import React, {useState, FC, ChangeEvent} from "react";
 // import {isEmail} from "validator";
 import {signin} from "../services/auth.service";
-import {history} from '../browserHistory';
-import {UserContext} from "../services/user.context";
 import {SignInRequest} from "../model/User";
-import {Box, Input, Paper, TextField, Button} from "@material-ui/core";
-import styled from "styled-components";
+import {Button, TextField} from "@material-ui/core";
+import {RouteComponentProps} from "react-router";
+import {withRouter} from "react-router-dom";
 
 const required = (value: any) => {
     if (!value) {
@@ -44,8 +42,8 @@ const validPassword = (password: string) => {
 //     setUser: (user: User) => void;
 // }
 // export const SigninView = props => { // same as with ()
-export const SigninView: FC = () => {
-
+export const RouterlessSigninView: FC<RouteComponentProps> = (props) => {
+    const {history} = props;
     const [signInRequest, setSignInRequest] = useState<SignInRequest>({} as SignInRequest);
 
     const [loading, setLoading] = useState(false);
@@ -118,18 +116,14 @@ export const SigninView: FC = () => {
 
     return (
         <div>
-
-            <div className="loginbgcolor">
-                <h1>Sign In</h1>
-            </div>
-
             <div className="loginbox">
                 {/* migrate away from onSubmit and forms and just have a button down blow with and onClick={handleSignin}*/}
 
                 <div className="form-group">
                     <label htmlFor="email"> </label>
                     {/*value={email} we took this out from inline input tag*/}
-                    <TextField id="outlined-basic" label="Email" variant="outlined"type="text" name="email" onChange={onChangeEmail} className="form-control"
+                    <TextField id="outlined-basic" label="Email" variant="outlined" type="text" name="email"
+                               onChange={onChangeEmail} className="form-control"
                         // validations={[required, validEmail]}
                     />
                     <p>{emailError}</p>
@@ -137,12 +131,14 @@ export const SigninView: FC = () => {
 
                 <div className="form-group">
                     <label htmlFor="password"> </label>
-                    <TextField id="outlined-basic" label="password" variant="outlined"type="password" name="password" className="form-control" onChange={onChangePassword}/>
+                    <TextField id="outlined-basic" label="password" variant="outlined" type="password" name="password"
+                               className="form-control" onChange={onChangePassword}/>
                     <p> {passwordError}</p>
                 </div>
 
                 <div className="form-group">
-                    <Button variant="contained" color="primary" onClick={handleSignIn} className="btn btn-primary btn-block" disabled={loading}>
+                    <Button variant="contained" color="primary" onClick={handleSignIn}
+                            className="btn btn-primary btn-block" disabled={loading}>
                         {loading && (
                             <span className="spinner-border spinner-border-sm"/>
                         )}
@@ -160,8 +156,9 @@ export const SigninView: FC = () => {
             </div>
         </div>
     )
-
 };
+
+export const SigninView = withRouter(RouterlessSigninView);
 
 
 //auth.services line 29 what type should signinrequest be?

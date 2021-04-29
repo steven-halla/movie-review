@@ -1,13 +1,13 @@
 import React, {useContext, useEffect} from 'react';
-import {Link} from 'react-router-dom';
+
 import {getUser} from "../services/user.service";
 import {getCurrentUserAuth} from "../services/getCurrentUserAuth";
 import {isLoggedIn} from "../services/auth.service";
-import {history} from "../browserHistory";
 import {UserContext} from "../services/user.context";
+import {history} from "../browserHistory";
 
 export const HomeView = () => {
-    const { setUser } = useContext(UserContext);;
+    const {setUser} = useContext(UserContext);
 
     useEffect(() => {
         if (!isLoggedIn()) {
@@ -24,14 +24,11 @@ export const HomeView = () => {
 
     return (
         <div>
-            <div className="loginbgcolor">
-                <h1>Home</h1>
-            </div>
+            {/*<ViewHeader text="Home" />*/}
             <div>
                 <p>3 random movies here</p>
                 <p>Each movie will have a random review from our DB pop up</p>
                 <p>Each movie will have a review average based on the number of reviews it got</p>
-
             </div>
 
             <div>

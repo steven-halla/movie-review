@@ -6,26 +6,27 @@ import {AxiosResponse} from "axios";
 import {User} from "../model/User";
 import {Box, Paper} from "@material-ui/core";
 import styled from "styled-components";
+import {ViewHeader} from "./ViewHeader";
 
 // we are not making adds/deletes to he list, therefore we will set our list to a key named index ( the index of the item)
 // if we add/delete items  then index would not work. In that case we would need the item id number.
 
 
 const CriticListDiv = styled.div`
-    &.critic-view {
-      max-width: 800px;
-      margin: auto;
-      background-color: #eeeeee;
-    }
-  
+  &.critic-view {
+    max-width: 800px;
+    margin: auto;
+    background-color: #eeeeee;
+  }
+
   .critic-list {
     margin: 10px;
 
   }
-  
+
   ul li {
     margin: auto;
-    list-style-type:none;
+    list-style-type: none;
     color: red;
     margin-right: 37px;
   }
@@ -33,7 +34,7 @@ const CriticListDiv = styled.div`
 `;
 
 export const CriticList: FC = () => {
-    const { users, setUsers } = useContext(UserContext);
+    const {users, setUsers} = useContext(UserContext);
 
     useEffect(() => {
         getUsers()
@@ -45,31 +46,23 @@ export const CriticList: FC = () => {
 
     return (
         <CriticListDiv className="critic-view">
-
             <div>
-                <div className="loginbgcolor">
-                    <h1>Critic List</h1>
-                </div>
-                <div>
-                    {users.map((user, index) => (
-                        <CriticUser key={index} user={user}/>
-                    ))}
-                </div>
+                {users.map((user, index) => (
+                    <CriticUser key={index} user={user}/>
+                ))}
             </div>
         </CriticListDiv>
-
-
     );
 };
 
 interface CriticUserProps {
     user: User;
 }
+
 // FC<CriticsUserProps> <-- this is called "generics", google "typescript basic generics" "what is generics"
 const CriticUser: FC<CriticUserProps> = (props) => {
-    const { user } = props;
+    const {user} = props;
     return (
-
         <CriticListDiv className="critic-view">
             <Paper className="critic-list">
                 <section>
@@ -84,12 +77,9 @@ const CriticUser: FC<CriticUserProps> = (props) => {
                         </li>
 
 
-
                     </ul>
                 </section>
             </Paper>
-
         </CriticListDiv>
-
     );
 }

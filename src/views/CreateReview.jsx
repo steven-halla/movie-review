@@ -1,15 +1,16 @@
 import React, {useContext, useState} from 'react';
-import {history} from "../browserHistory";
 import {useParams} from "react-router";
 import {updateMovieReview} from "../services/movie.service";
 import {UserContext} from "../services/user.context";
+import {withRouter} from "react-router-dom";
 
 // *** create react context check below for specific ***
 //create user context
 
 
 // ({user}) this lets us know what we are passing a user with its attributes
-export const CreateReview = () => {
+const RouterlessCreateReview = (props) => {
+    const {history} = props;
     const {user} = useContext(UserContext);
     const [rating, setRating] = useState("");
 
@@ -41,16 +42,13 @@ export const CreateReview = () => {
         updateMovieReview(request).then(newReview => {
             console.log("created movie review:")
             console.log(newReview);
-            history.push("/");
+            history.push(`/movies/${movieId}`);
         });
     };
 
 
     return (
         <div>
-            <div className="loginbgcolor">
-                <h1>Create Movie Review</h1>
-            </div>
             <div>
                 <p>Your rating of this movie:</p>
                 <form onSubmit={formHandler}>
@@ -82,3 +80,5 @@ export const CreateReview = () => {
         </div>
     );
 };
+
+export const CreateReview = withRouter(RouterlessCreateReview);
