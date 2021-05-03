@@ -5,6 +5,8 @@ import {Box, TextField, Button} from "@material-ui/core";
 import styled from "styled-components";
 import {RouteComponentProps} from "react-router";
 import {withRouter} from "react-router-dom";
+import {Alert, AlertTitle} from '@material-ui/lab';
+
 
 const SignUpViewDiv = styled.div`
   &.signupbox {
@@ -110,14 +112,9 @@ const RouterlessSignupView: FC<RouteComponentProps> = (props) => {
         });
     };
 
-    // const handleCreateUser = () => {
-    //     // alert("don't forget to forward to user profile after creation!")
-    //     createUser(user).then(response => {
-    //         alert(JSON.stringify(response.data));
-    //         setUser(response.data);
-    //     });
-    // };
 
+
+    // need to fix this so that user cannot create account if validaitons are not correct
     const handleSignup = () => {
         // @ts-ignore
         signup(user.email, user.password, user.displayName).then(response => {
@@ -134,21 +131,33 @@ const RouterlessSignupView: FC<RouteComponentProps> = (props) => {
                         <label htmlFor="email"/>
                         <TextField id="outlined-basic" label="Email" variant="outlined" type="text" name="email"
                                    onChange={onChangeEmail}/>
-                        <p>{emailError}</p>
+                        {emailError && (
+                            <Alert severity="error">
+                                <AlertTitle>{emailError} </AlertTitle>
+                            </Alert>
+                        )}
                     </Box>
 
                     <Box>
                         <label htmlFor="displayName"/>
                         <TextField id="outlined-basic" label="DisplayName" variant="outlined" type="text"
                                    name="displayName" onChange={onChangeDisplayName}/>
-                        <p>{displayNameError}</p>
+                        {displayNameError && (
+                            <Alert severity="error">
+                                <AlertTitle>{displayNameError} </AlertTitle>
+                            </Alert>
+                        )}
                     </Box>
 
                     <Box>
                         <label htmlFor="password"/>
                         <TextField id="outlined-basic" label="Password" variant="outlined" type="password"
                                    name="password" onChange={onChangePassword}/>
-                        <p> {passwordError}</p>
+                        {passwordError && (
+                            <Alert severity="error">
+                                <AlertTitle>{passwordError} </AlertTitle>
+                            </Alert>
+                        )}
                     </Box>
 
                     <Box>

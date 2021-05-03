@@ -5,6 +5,10 @@ import {SignInRequest} from "../model/User";
 import {Button, TextField} from "@material-ui/core";
 import {RouteComponentProps} from "react-router";
 import {withRouter} from "react-router-dom";
+import {makeStyles} from '@material-ui/core/styles';
+import {Alert, AlertTitle} from '@material-ui/lab';
+import Snackbar from '@material-ui/core/Snackbar';
+
 
 const required = (value: any) => {
     if (!value) {
@@ -87,7 +91,7 @@ export const RouterlessSigninView: FC<RouteComponentProps> = (props) => {
         }
     };
 
-// should I put CreateUserRequest from user.ts?
+// should I put CreateUserRequest from user.js?
 
     const handleSignIn = () => {
         setMessage("");
@@ -125,15 +129,26 @@ export const RouterlessSigninView: FC<RouteComponentProps> = (props) => {
                     <TextField id="outlined-basic" label="Email" variant="outlined" type="text" name="email"
                                onChange={onChangeEmail} className="form-control"
                         // validations={[required, validEmail]}
+
                     />
-                    <p>{emailError}</p>
+                    {emailError && (
+                        <Alert severity="error">
+                            <AlertTitle>{emailError} </AlertTitle>
+                        </Alert>
+                    )}
+
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="password"> </label>
                     <TextField id="outlined-basic" label="password" variant="outlined" type="password" name="password"
                                className="form-control" onChange={onChangePassword}/>
-                    <p> {passwordError}</p>
+
+                    {passwordError && (
+                        <Alert severity="error">
+                            <AlertTitle>{passwordError} </AlertTitle>
+                        </Alert>
+                    )}
                 </div>
 
                 <div className="form-group">
