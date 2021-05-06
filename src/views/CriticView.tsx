@@ -3,7 +3,6 @@ import React, {FC, useContext, useEffect, useState} from 'react';
 import {useParams} from "react-router";
 import {getUserProfile, getUserReviews} from "../services/user.service";
 import {UserProfile} from "../model/User";
-import {ViewHeader} from "./ViewHeader";
 import {Box, Paper} from "@material-ui/core";
 import styled from "styled-components";
 import {getMovie} from "../services/movie.service";
@@ -26,7 +25,7 @@ const CriticViewDiv = styled.div`
     }
 
     .critic-header-name {
-      font-family: "Avenir Next Condensed";
+      font-family: "Avenir Next Condensed", serif;
       font-size: xx-large;
       color: green;
       padding-bottom: 10px;
