@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {UserContext} from "../services/user.context";
 
 import styled from "styled-components";
-import {Box, Typography} from "@material-ui/core";
+import {Box, Typography,Button} from "@material-ui/core";
 
 const ProfileViewDiv = styled.div`
   &.profile-user-view {
@@ -13,21 +13,32 @@ const ProfileViewDiv = styled.div`
   }
 
   .user-info {
-    color: red;
+    color: black;
+    font-size: large;
   }
-
+  //
+  //.link {
+  //  margin: auto;
+  //  display: block;
+  //  width: 115px;
+  //  height: 25px;
+  //  background: #4E9CAF;
+  //  padding: 10px;
+  //  text-align: center;
+  //  border-radius: 1px;
+  //  color: white;
+  //  font-weight: bold;
+  //  line-height: 25px;
+  //}
+  
   .link {
-    margin: auto;
-    display: block;
-    width: 115px;
-    height: 25px;
-    background: #4E9CAF;
-    padding: 10px;
-    text-align: center;
-    border-radius: 5px;
-    color: white;
-    font-weight: bold;
-    line-height: 25px;
+    color: red;
+    text-decoration: red;
+    
+    &:hover {
+      font-size: x-large;
+     
+    }
   }
 `;
 
@@ -42,9 +53,7 @@ export const ProfileView: FC = () => {
                 <p>Name: {user?.displayName}</p>
                 <p>Email: {user?.email}</p>
             </Box>
-            <Typography className="link" variant="button">
-                <Link to="/signout">Sign Out</Link>
-            </Typography>
+                <Link className="link" to="/signout">Sign Out</Link>
         </ProfileViewDiv>
     );
 };

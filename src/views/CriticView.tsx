@@ -3,11 +3,12 @@ import React, {FC, useContext, useEffect, useState} from 'react';
 import {useParams} from "react-router";
 import {getUserProfile, getUserReviews} from "../services/user.service";
 import {UserProfile} from "../model/User";
-import {Box, Paper} from "@material-ui/core";
+import {Box, Paper, Button, FormControl} from "@material-ui/core";
 import styled from "styled-components";
-import {getMovie} from "../services/movie.service";
+import {deleteMovieReview, getAllMovies, getMovie} from "../services/movie.service";
 import {MovieContext} from "../services/movie.context";
-import {MovieReview} from "../model/Movie";
+import {Movie, MovieReview, MovieReviewUpdateRequest} from "../model/Movie";
+import {AxiosResponse} from "axios";
 
 
 const CriticViewDiv = styled.div`
@@ -42,6 +43,10 @@ const CriticViewDiv = styled.div`
   }
 `;
 
+interface CreateReviewParams {
+  id: string;
+}
+
 
 // on line 9 we pass in (prop) I'm going to delete it
 export const CriticView: FC = () => {
@@ -56,7 +61,42 @@ export const CriticView: FC = () => {
     // @ts-ignore
     ({id} = useParams());
 
-    const [reviews, setReviews] = useState([]);
+  const {id: movieReviewString} = useParams<CreateReviewParams>(); // rename url id to movie id
+
+
+  const [reviews, setReviews] = useState([]);
+  const movieReviewId = Number(movieReviewString);
+
+
+
+  // useEffect(() => {
+  //   deleteMovieReview(id)
+  //     .then((response: AxiosResponse<MovieReviewUpdateRequest>) => {
+  //       console.log(response.data);
+  //       setReviews(response.data);
+  //     });
+  // }, []);
+
+
+  // useEffect(() => {
+  //   deleteMovieReview(id)
+  //     .then( response => {
+  //       console.log(response.data);
+  //       setReviews(response.data);
+  //     });
+  // }, []);
+
+  // useEffect(() => {
+  //   deleteMovieReview(movieReviewId)
+  //     .then(response => {
+  //       console.log(response.data);
+  //       setReviews(response.data);
+  //     })
+  //
+  // }, []);
+
+
+
 
     useEffect(() => {
         getUserProfile(id)
@@ -73,6 +113,8 @@ export const CriticView: FC = () => {
             });
 
     }, []);
+
+
 
     useEffect(() => {
         getUserReviews(id)
@@ -101,12 +143,23 @@ export const CriticView: FC = () => {
                                 <strong>Movie:{review.movie.title}</strong>
                                 <br/>
                                 <br/>
-                                <strong>rating: {review.rating}</strong>
+                                <strong>My rating: {review.rating}</strong>
                                 <br/>
                                 <br/>
-                                <strong className="written-review">written review: {review.writtenReview}</strong>
+                                <strong className="written-review">My written review: {review.writtenReview}</strong>
                                 <br/>
                                 <br/>
+                                <FormControl>
+                                  <Button
+                                    className="delete-button"
+                                    variant="contained"
+                                    // onClick={deleteMovieReview}
+                                  >
+                                    Delete Review
+                                  </Button>
+
+                                </FormControl>
+
                             </li>
                         </Paper>
 

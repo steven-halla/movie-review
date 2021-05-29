@@ -68,6 +68,7 @@ const RouterlessCreateReview: FC<RouteComponentProps> = (props) => {
     const {id: movieIdString} = useParams<CreateReviewParams>(); // rename url id to movie id
     const movieId = Number(movieIdString);
 
+
     const onSubmit = () => {
         if (!user) {
             alert("no user logged in");
@@ -94,13 +95,13 @@ const RouterlessCreateReview: FC<RouteComponentProps> = (props) => {
             rating: rating,
             writtenReview: writtenReview
         };
+
         updateMovieReview(request).then(newReview => {
             console.log("created movie review:")
             console.log(newReview);
             history.push(`/movies/${movieId}`);
         });
     };
-
 
     return (
         <CreateReviewDiv className="create-review">
@@ -143,6 +144,8 @@ const RouterlessCreateReview: FC<RouteComponentProps> = (props) => {
                     variant="outlined"
                 />
             </FormControl>
+
+
 
             <FormControl className="review-submit-button">
                 <Button
