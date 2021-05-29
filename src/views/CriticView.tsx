@@ -8,7 +8,10 @@ import styled from "styled-components";
 import {deleteMovieReview, getAllMovies, getMovie} from "../services/movie.service";
 import {MovieContext} from "../services/movie.context";
 import {Movie, MovieReview, MovieReviewUpdateRequest} from "../model/Movie";
+import {User} from "../model/User";
+
 import {AxiosResponse} from "axios";
+import {UserContext} from "../services/user.context";
 
 
 const CriticViewDiv = styled.div`
@@ -56,8 +59,10 @@ export const CriticView: FC = () => {
     // i had userprofle wrapped in curly bracers and had it changed to square brackets
     const [userProfile, setUserProfile] = useState<UserProfile>({} as UserProfile);
     const {movie, setMovie} = useContext(MovieContext);
+    const {user, setUser} = useContext(UserContext);
 
-    let id: number;
+
+  let id: number;
     // @ts-ignore
     ({id} = useParams());
 
@@ -86,14 +91,23 @@ export const CriticView: FC = () => {
   //     });
   // }, []);
 
+
+
   // useEffect(() => {
   //   deleteMovieReview(movieReviewId)
+  //     if(user._id === id) {
+  //       return false;
+  //     } else{
+  //       return true;
+  //   }
   //     .then(response => {
   //       console.log(response.data);
-  //       setReviews(response.data);
+  //       setReviews(movieReviewId);
   //     })
   //
   // }, []);
+
+
 
 
 

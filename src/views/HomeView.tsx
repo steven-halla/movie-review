@@ -24,24 +24,13 @@ export const HomeView = () => {
 
     return (
         <div>
-            {/*<ViewHeader text="Home" />*/}
-            <div>
-                <p>3 random movies here</p>
-                <p>Each movie will have a random review from our DB pop up</p>
-                <p>Each movie will have a review average based on the number of reviews it got</p>
-            </div>
+
 
             <div>
-                <img className="movie-image" src="https://deepfocusreview.com/wp-content/uploads/2016/12/aliens.jpg"
-                     alt=""/>
-                <p>This is where a random review is going to go!</p>
-                <p>This is where our review score will go based on the total amount of reviews. </p>
-                <p>I may include movies that have the most reviews pop up as well.</p>
-                <p>I could have multiple movie slots. One for most reviewed, one for best reviews and worst reviews
-                    as a couple of examples.</p>
-            </div>
 
-            <div>
+              <div>
+                <h1>Welcome to Tom Rotten-A movie review project</h1>
+              </div>
 
                 <nav className="navbar navbar-light bg-info">
                     <h1>Like what you see? Connect with us on Social media!</h1>
@@ -66,8 +55,8 @@ export const HomeView = () => {
                     <div className="col-lg-12">
                         <h2>Contact us:</h2>
 
-                        <p>Phone: 777-8675-309</p>
-                        <p>Email: admin@tomrotten.com</p>
+                        <p>Phone: 111-111-1111</p>
+                        <p>Email: noEmail@email.com </p>
                     </div>
                 </nav>
             </div>
