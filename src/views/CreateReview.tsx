@@ -7,7 +7,7 @@ import {MovieReviewUpdateRequest} from "model/Movie";
 import {User} from 'model/User';
 import ChatIcon from '@material-ui/icons/Chat';
 import styled from "styled-components";
-import {Box, Button, FormControl, InputLabel, MenuItem, Select, TextareaAutosize, TextField} from "@material-ui/core";
+import {Button, FormControl, InputLabel, MenuItem, Select, TextField} from "@material-ui/core";
 
 
 const CreateReviewDiv = styled.div`
@@ -55,111 +55,111 @@ const CreateReviewDiv = styled.div`
 `;
 
 interface CreateReviewParams {
-    id: string;
+  id: string;
 }
 
 const RouterlessCreateReview: FC<RouteComponentProps> = (props) => {
-    const {history} = props;
-    const {user} = useContext(UserContext);
-    const [rating, setRating] = useState<number>();
+  const {history} = props;
+  const {user} = useContext(UserContext);
+  const [rating, setRating] = useState<number>();
 
-    const [writtenReview, setWrittenReview] = useState("");
+  const [writtenReview, setWrittenReview] = useState("");
 
-    const {id: movieIdString} = useParams<CreateReviewParams>(); // rename url id to movie id
-    const movieId = Number(movieIdString);
+  const {id: movieIdString} = useParams<CreateReviewParams>(); // rename url id to movie id
+  const movieId = Number(movieIdString);
 
 
-    const onSubmit = () => {
-        if (!user) {
-            alert("no user logged in");
-            return
-        }
+  const onSubmit = () => {
+    if (!user) {
+      alert("no user logged in");
+      return
+    }
 
-        const currentUser: User = user!;
+    const currentUser: User = user!;
 
-        // check to force user to select a rating
-        if (!rating) {
-            alert("Please select a rating");
-            return;
-        }
-        // if no user is logged in
-        if (!currentUser.id) {
-            alert("Please login, user id is null");
-            return;
-        }
+    // check to force user to select a rating
+    if (!rating) {
+      alert("Please select a rating");
+      return;
+    }
+    // if no user is logged in
+    if (!currentUser.id) {
+      alert("Please login, user id is null");
+      return;
+    }
 
-        // pass in review next to rating
-        const request: MovieReviewUpdateRequest = {
-            userId: currentUser.id,
-            movieId: movieId,
-            rating: rating,
-            writtenReview: writtenReview
-        };
-
-        updateMovieReview(request).then(newReview => {
-            console.log("created movie review:")
-            console.log(newReview);
-            history.push(`/movies/${movieId}`);
-        });
+    // pass in review next to rating
+    const request: MovieReviewUpdateRequest = {
+      userId: currentUser.id,
+      movieId: movieId,
+      rating: rating,
+      writtenReview: writtenReview
     };
 
-    return (
-        <CreateReviewDiv className="create-review">
-            <div className="title-row">
-                <ChatIcon className="chat-box-icon"/>
-                <div className="title-text">Your rating of this movie</div>
-            </div>
+    updateMovieReview(request).then(newReview => {
+      console.log("created movie review:")
+      console.log(newReview);
+      history.push(`/movies/${movieId}`);
+    });
+  };
 
-            <FormControl variant="outlined" className="rating-form-control">
-                <InputLabel htmlFor="rating-input">Rating</InputLabel>
-                <Select
-                    key="Rating"
-                    id="rating-input"
-                    value={rating}
-                    onChange={(event) => setRating(Number(event.target.value))}
-                    label="Rating"
-                >
-                    <MenuItem value="">Select Rating (1 low - 10 high)</MenuItem>
-                    <MenuItem value={10}>10</MenuItem>
-                    <MenuItem value={9}>9</MenuItem>
-                    <MenuItem value={8}>8</MenuItem>
-                    <MenuItem value={7}>7</MenuItem>
-                    <MenuItem value={6}>6</MenuItem>
-                    <MenuItem value={5}>5</MenuItem>
-                    <MenuItem value={4}>4</MenuItem>
-                    <MenuItem value={3}>3</MenuItem>
-                    <MenuItem value={2}>2</MenuItem>
-                    <MenuItem value={1}>1</MenuItem>
-                </Select>
-            </FormControl>
+  return (
+    <CreateReviewDiv className="create-review">
+      <div className="title-row">
+        <ChatIcon className="chat-box-icon"/>
+        <div className="title-text">Your rating of this movie</div>
+      </div>
 
-            <FormControl variant="outlined" className="review-form-control">
-                <TextField
-                    id="review-label"
-                    label="Review"
-                    name="review"
-                    multiline={true}
-                    onChange={(event) => setWrittenReview(event.target.value)}
-                    value={writtenReview}
-                    variant="outlined"
-                />
-            </FormControl>
+      <FormControl variant="outlined"
+                   className="rating-form-control">
+        <InputLabel htmlFor="rating-input">Rating</InputLabel>
+        <Select
+          key="Rating"
+          id="rating-input"
+          value={rating}
+          onChange={(event) => setRating(Number(event.target.value))}
+          label="Rating"
+        >
+          <MenuItem value="">Select Rating (1 low - 10 high)</MenuItem>
+          <MenuItem value={10}>10</MenuItem>
+          <MenuItem value={9}>9</MenuItem>
+          <MenuItem value={8}>8</MenuItem>
+          <MenuItem value={7}>7</MenuItem>
+          <MenuItem value={6}>6</MenuItem>
+          <MenuItem value={5}>5</MenuItem>
+          <MenuItem value={4}>4</MenuItem>
+          <MenuItem value={3}>3</MenuItem>
+          <MenuItem value={2}>2</MenuItem>
+          <MenuItem value={1}>1</MenuItem>
+        </Select>
+      </FormControl>
 
+      <FormControl variant="outlined"
+                   className="review-form-control">
+        <TextField
+          id="review-label"
+          label="Review"
+          name="review"
+          multiline={true}
+          onChange={(event) => setWrittenReview(event.target.value)}
+          value={writtenReview}
+          variant="outlined"
+        />
+      </FormControl>
 
-
-            <FormControl className="review-submit-button">
-                <Button
-                    name="rating"
-                    variant="contained"
-                    color="primary"
-                    onClick={onSubmit}
-                    disabled={rating == null}
-                >
-                    Leave Review
-                </Button>
-            </FormControl>
-        </CreateReviewDiv>
-    );
+      <FormControl className="review-submit-button">
+        <Button
+          name="rating"
+          variant="contained"
+          color="primary"
+          onClick={onSubmit}
+          disabled={rating == null}
+        >
+          Leave Review
+        </Button>
+      </FormControl>
+    </CreateReviewDiv>
+  );
 };
 
 export const CreateReview = withRouter(RouterlessCreateReview);

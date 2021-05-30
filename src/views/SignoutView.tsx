@@ -5,18 +5,16 @@ import {RouteComponentProps} from "react-router";
 import {withRouter} from "react-router-dom";
 
 const RouterlessSignoutView: FC<RouteComponentProps> = (props) => {
-    const {history} = props;
-    const {setUser} = useContext(UserContext);
+  const {history} = props;
+  const {setUser} = useContext(UserContext);
 
-    useEffect(() => {
-        // since <Header depends on user, calling setUser will cause the <Header> component to re-render.
-        setUser(undefined);
-        // this will clear localstorage
-        signout();
-        history.replace("/signin");
-    }, []);
+  useEffect(() => {
+    setUser(undefined);
+    signout();
+    history.replace("/signin");
+  }, []);
 
-    return null;
+  return null;
 }
 
 export const SignoutView = withRouter(RouterlessSignoutView);

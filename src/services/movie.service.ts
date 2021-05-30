@@ -4,9 +4,6 @@ import {Movie, MovieReview, MovieReviewUpdateRequest} from "model/Movie";
 
 const API_URL = `http://localhost:7777`;
 
-
-//i passed in user may need to delete this includes headers/auth headers
-
 export const getAllMovies = (): Promise<AxiosResponse<Movie[]>> => {
   return axios.get(API_URL + `/movies`, {headers: authHeader()});
 };
@@ -24,7 +21,7 @@ export const createMovie = (movie: Movie): Promise<AxiosResponse<Movie>> => {
 };
 
 export const getMovieReviews = (movieId: number): Promise<AxiosResponse<MovieReview[]>> => {
-    return axios.get(API_URL + `/movies/${movieId}/reviews`);
+  return axios.get(API_URL + `/movies/${movieId}/reviews`);
 };
 
 //we pass in movieId but never use it I wonder if I can delete it from line 24.

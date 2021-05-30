@@ -8,13 +8,13 @@ const StyledViewHeaderDiv = styled.div`
 `;
 
 interface Props {
-    text?: string;
+  text?: string;
 }
 
 export const ViewHeader: FC<Props> = (props) => {
-    return (
-        <StyledViewHeaderDiv className="header-text">
-            <h1>{props.text}</h1>
-        </StyledViewHeaderDiv>
-    );
+  return (
+    <StyledViewHeaderDiv className="header-text">
+      <h1>{props.text}</h1>
+    </StyledViewHeaderDiv>
+  );
 }

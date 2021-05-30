@@ -1,10 +1,8 @@
 import React, {FC, useContext} from 'react';
-
 import {Link} from "react-router-dom";
 import {UserContext} from "../services/user.context";
-
 import styled from "styled-components";
-import {Box, Typography,Button} from "@material-ui/core";
+import {Box} from "@material-ui/core";
 
 const ProfileViewDiv = styled.div`
   &.profile-user-view {
@@ -16,6 +14,7 @@ const ProfileViewDiv = styled.div`
     color: black;
     font-size: large;
   }
+
   //
   //.link {
   //  margin: auto;
@@ -30,30 +29,28 @@ const ProfileViewDiv = styled.div`
   //  font-weight: bold;
   //  line-height: 25px;
   //}
-  
+
   .link {
     color: red;
     text-decoration: red;
-    
+
     &:hover {
       font-size: x-large;
-     
     }
   }
 `;
 
-
 export const ProfileView: FC = () => {
-    const {user} = useContext(UserContext);
+  const {user} = useContext(UserContext);
 
-    return (
-        <ProfileViewDiv className="profile-user-view">
-            <Box className="user-info" mb="15px">
-                {/*user.email is just a temp thing will remove at the end */}
-                <p>Name: {user?.displayName}</p>
-                <p>Email: {user?.email}</p>
-            </Box>
-                <Link className="link" to="/signout">Sign Out</Link>
-        </ProfileViewDiv>
-    );
+  return (
+    <ProfileViewDiv className="profile-user-view">
+      <Box className="user-info" mb="15px">
+        {/*user.email is just a temp thing will remove at the end */}
+        <p>Name: {user?.displayName}</p>
+        <p>Email: {user?.email}</p>
+      </Box>
+      <Link className="link" to="/signout">Sign Out</Link>
+    </ProfileViewDiv>
+  );
 };

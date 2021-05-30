@@ -6,9 +6,6 @@ import styled from "styled-components";
 import {RouteComponentProps} from "react-router";
 import clsx from "clsx";
 
-// This will create a header on every page including our login/reg page
-
-
 const StyleHeaderDiv = styled.div`
   &.top-header {
     width: 100%;
@@ -50,51 +47,51 @@ const StyleHeaderDiv = styled.div`
 `;
 
 const RouterlessHeader: FC<RouteComponentProps> = (props) => {
-    const {history} = props;
-    const {user} = useContext(UserContext);
+  const {history} = props;
+  const {user} = useContext(UserContext);
 
-    const pathname = history.location.pathname;
+  const pathname = history.location.pathname;
 
-    if (isLoggedIn() && user != null) {
-        return (
-            <StyleHeaderDiv className="top-header">
-                <div className="links">
-                    <Link
-                        className={clsx("link", pathname.startsWith('/critics') && 'selected')}
-                        to="/critics"
-                    >
-                        Critics
-                    </Link>
-                    <Link
-                        className={clsx("link", pathname.startsWith('/movies') && 'selected')}
-                        to="/movies"
-                    >
-                        Movies
-                    </Link>
-                    <Link
-                        className={clsx("link", pathname === '/' && 'selected')}
-                        to="/"
-                    >
-                        Home
-                    </Link>
-                    <Link
-                        className={clsx("link", pathname.startsWith('/profile') && 'selected')}
-                        to="/profile"
-                    >
-                        {user.displayName || user.email || 'Profile'}
-                    </Link>
-                </div>
-            </StyleHeaderDiv>
-        );
-    }
+  if (isLoggedIn() && user != null) {
     return (
-        <StyleHeaderDiv className="top-header">
-            <div className="links">
-                <Link className={clsx("link", pathname === '/signin' && 'selected')} to={"/signin"}>Sign In</Link>
-                <Link className={clsx("link", pathname === '/signup' && 'selected')} to={"/signup"}>Sign Up</Link>
-            </div>
-        </StyleHeaderDiv>
-    )
+      <StyleHeaderDiv className="top-header">
+        <div className="links">
+          <Link
+            className={clsx("link", pathname.startsWith('/critics') && 'selected')}
+            to="/critics"
+          >
+            Critics
+          </Link>
+          <Link
+            className={clsx("link", pathname.startsWith('/movies') && 'selected')}
+            to="/movies"
+          >
+            Movies
+          </Link>
+          <Link
+            className={clsx("link", pathname === '/' && 'selected')}
+            to="/"
+          >
+            Home
+          </Link>
+          <Link
+            className={clsx("link", pathname.startsWith('/profile') && 'selected')}
+            to="/profile"
+          >
+            {user.displayName || user.email || 'Profile'}
+          </Link>
+        </div>
+      </StyleHeaderDiv>
+    );
+  }
+  return (
+    <StyleHeaderDiv className="top-header">
+      <div className="links">
+        <Link className={clsx("link", pathname === '/signin' && 'selected')} to={"/signin"}>Sign In</Link>
+        <Link className={clsx("link", pathname === '/signup' && 'selected')} to={"/signup"}>Sign Up</Link>
+      </div>
+    </StyleHeaderDiv>
+  )
 }
 
 export const Header = withRouter(RouterlessHeader);
