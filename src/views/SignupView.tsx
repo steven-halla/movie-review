@@ -40,7 +40,6 @@ const RouterlessSignupView: FC<RouteComponentProps> = (props) => {
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
-  // not fully sure on how to read all of this
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     console.log('event.target.value =', event.target.value)
     // @ts-ignore

@@ -68,7 +68,6 @@ const RouterlessCreateReview: FC<RouteComponentProps> = (props) => {
   const {id: movieIdString} = useParams<CreateReviewParams>(); // rename url id to movie id
   const movieId = Number(movieIdString);
 
-
   const onSubmit = () => {
     if (!user) {
       alert("no user logged in");
@@ -77,18 +76,16 @@ const RouterlessCreateReview: FC<RouteComponentProps> = (props) => {
 
     const currentUser: User = user!;
 
-    // check to force user to select a rating
     if (!rating) {
       alert("Please select a rating");
       return;
     }
-    // if no user is logged in
+
     if (!currentUser.id) {
       alert("Please login, user id is null");
       return;
     }
 
-    // pass in review next to rating
     const request: MovieReviewUpdateRequest = {
       userId: currentUser.id,
       movieId: movieId,

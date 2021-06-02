@@ -24,8 +24,6 @@ export const getMovieReviews = (movieId: number): Promise<AxiosResponse<MovieRev
   return axios.get(API_URL + `/movies/${movieId}/reviews`);
 };
 
-//we pass in movieId but never use it I wonder if I can delete it from line 24.
-// pass in review on line 24
 export const updateMovieReview = (request: MovieReviewUpdateRequest): Promise<AxiosResponse<MovieReview>> => {
   return axios.patch(API_URL + `/movies/${request.movieId}/reviews`, request, {headers: authHeader()});
 };

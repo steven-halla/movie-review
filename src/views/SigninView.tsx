@@ -49,8 +49,6 @@ export const RouterlessSigninView: FC<RouteComponentProps> = (props) => {
     }
   };
 
-// should I put CreateUserRequest from user.ts?
-
   const handleSignIn = () => {
     setMessage("");
     setLoading(true);

@@ -45,7 +45,7 @@ interface CriticViewParams {
 }
 
 export const CriticView: FC = () => {
-  const {id: userIdString} = useParams<CriticViewParams>(); // rename url id to movie id
+  const {id: userIdString} = useParams<CriticViewParams>();
   const userId = Number(userIdString);
 
   const {user} = useContext(UserContext);
@@ -86,7 +86,6 @@ export const CriticView: FC = () => {
       <Box className="critic-reviews">
         {reviews.map((review: MovieReview) => {
           return (
-            //currently this grabs movie ids that match with user id
             <Paper key={review.id} className="critic-review-list-item" elevation={11}>
               <li>
                 <strong>{review.movie.title}</strong>

@@ -34,11 +34,10 @@ export const MovieList = () => {
   useEffect(() => {
     getAllMovies()
       .then(response => {
-        // console.log("movies")
-        // console.log(response.data);
         setMovies(response.data);
       })
   }, []);
+
   return (
     <StyledMovieListDiv className="movie-list">
       <Grid container spacing={1}
@@ -51,7 +50,7 @@ export const MovieList = () => {
     </StyledMovieListDiv>
   );
 };
-//check postman lets change url to inlcude url
+
 const MovieView = (props: { movie: Movie; }) => {
   const {movie} = props;
 

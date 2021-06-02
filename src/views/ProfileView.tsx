@@ -46,7 +46,6 @@ export const ProfileView: FC = () => {
   return (
     <ProfileViewDiv className="profile-user-view">
       <Box className="user-info" mb="15px">
-        {/*user.email is just a temp thing will remove at the end */}
         <p>Name: {user?.displayName}</p>
         <p>Email: {user?.email}</p>
       </Box>

@@ -4,6 +4,8 @@ import {authHeader} from "./authHeader";
 
 const API_URL = "http://localhost:7777";
 
+
+
 export const signup = (email: string, password: string, displayName: string): Promise<AxiosResponse<User>> => {
   return axios
     .post(API_URL + "/auth/signup", {
